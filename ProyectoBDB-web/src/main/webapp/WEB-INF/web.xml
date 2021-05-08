@@ -10,13 +10,13 @@
         </session-timeout>
     </session-config>
 
-    <!-- Configracion para trabajr con servicios rest -->
+    <!-- Configuracion para trabajar con servicios rest -->
     <servlet>
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- Configracion para accerder a los servicios rest por medio de las peticiones -->
+    <!-- Configuracion para acceder a los servicios rest por medio de la URL (rest) -->
     <servlet-mapping>
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <url-pattern>/rest/*</url-pattern>
