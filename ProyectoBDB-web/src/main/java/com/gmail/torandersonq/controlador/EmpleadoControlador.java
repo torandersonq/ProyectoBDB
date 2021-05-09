@@ -1,6 +1,7 @@
 package com.gmail.torandersonq.controlador;
 
-import com.gmail.torandersonq.pojo.Empleado;
+import com.gmail.torandersonq.entidad.Empleado;
+import com.gmail.torandersonq.pojo.EmpleadoDto;
 import com.gmail.torandersonq.servicio.IEmpleadoServicio;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -38,7 +39,7 @@ public class EmpleadoControlador {
     @GET // Retorna
     @Produces(MediaType.APPLICATION_JSON) // Devuelve un JSON
     public Response retornar() {
-        Empleado empleado = new Empleado(1, "Anderson", "Operario");
+        EmpleadoDto empleado = new EmpleadoDto(1, "Anderson", "Operario");
         return Response.status(Response.Status.OK).entity(empleado).build();
     }
 
@@ -46,7 +47,7 @@ public class EmpleadoControlador {
     @GET // Retorna
     @Produces(MediaType.APPLICATION_JSON) // Devuelve un JSON
     public Response retornar(@PathParam("id") int id) {
-        Empleado empleado = new Empleado(id, "Anderson", "Operario");
+        EmpleadoDto empleado = new EmpleadoDto(id, "Anderson", "Operario");
         return Response.status(Response.Status.OK).entity(empleado).build();
     }
 
@@ -54,7 +55,7 @@ public class EmpleadoControlador {
     @POST // Inserta
     @Produces(MediaType.APPLICATION_JSON) // Devuelve un JSON
     public Response insertar(@Valid Empleado empleado) {
-        servicio.insertarEmpleado(empleado);
+        servicio.guardar(empleado);
         return Response.status(Response.Status.CREATED).build();
     }
 
@@ -62,7 +63,7 @@ public class EmpleadoControlador {
     @DELETE // Elimina
     @Produces(MediaType.APPLICATION_JSON) // Devuelve un JSON
     public Response eliminar(@PathParam("id") int empleado) {
-        servicio.eliminarEmpleado(empleado);
+        //servicio.eliminarEmpleado(empleado);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 

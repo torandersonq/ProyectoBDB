@@ -3,29 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gmail.torandersonq.servicio.implementacion;
+package com.gmail.torandersonq.repositorio.implementacion;
 
 import com.gmail.torandersonq.entidad.Empleado;
-import com.gmail.torandersonq.pojo.EmpleadoDto;
 import com.gmail.torandersonq.repositorio.IEmpleadoRepositorio;
-import com.gmail.torandersonq.servicio.IEmpleadoServicio;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author Ander
  */
 
-@Stateless  
-public class EmpleadoServicio implements IEmpleadoServicio{
-
-    @EJB
-    private IEmpleadoRepositorio repositorio;
+@Stateless
+public class EmpleadoRepositorio implements IEmpleadoRepositorio{
+    
+    @PersistenceContext(unitName = "com.edu.unicundi_ProyectoBDB-ejb_ejb_1.0-SNAPSHOTPU")
+    private EntityManager entidad;
 
     @Override
-    public List<EmpleadoDto> listar() {
+    public List<Empleado> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -36,7 +35,7 @@ public class EmpleadoServicio implements IEmpleadoServicio{
 
     @Override
     public void guardar(Empleado empleado) {
-        repositorio.guardar(empleado);
+        this.entidad.persist(entidad);
     }
 
     @Override
@@ -45,12 +44,8 @@ public class EmpleadoServicio implements IEmpleadoServicio{
     }
 
     @Override
-    public void eliminar(Integer id) {
+    public void eliminar(Empleado empleado) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
-    
-    
     
 }

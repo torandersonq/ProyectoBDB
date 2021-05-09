@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gmail.torandersonq.servicio;
+package com.gmail.torandersonq.repositorio;
 
 import com.gmail.torandersonq.entidad.Empleado;
-import com.gmail.torandersonq.pojo.EmpleadoDto;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -16,9 +15,9 @@ import javax.ejb.Local;
  */
 
 @Local
-public interface IEmpleadoServicio {
+public interface IEmpleadoRepositorio {
     
-    public List<EmpleadoDto> listar();
+    public List<Empleado> listar();
     
     public Empleado listarPorId(Integer id);
     
@@ -26,5 +25,6 @@ public interface IEmpleadoServicio {
     
     public void editar(Empleado empleado);
     
-    public void eliminar(Integer id);
+    public void eliminar(Empleado empleado);
+    
 }

@@ -3,43 +3,55 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gmail.torandersonq.pojo;
+package com.gmail.torandersonq.entidad;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author Ander
  */
+
+@Entity
+@Table(name = "empleado")
 public class Empleado implements Serializable{
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Integer id;
     
-    private int id;
-    
-    @NotNull(message = "Nombre Completo Requerido")
-    @Column(name = "nombreCompleto", length = 25, nullable = false)
+    @NotNull(message = "Nombre requerido")
+    @Size(max = 35)
+    @Column(name = "nombreCompleto", length = 35, nullable = false)
     private String nombreCompleto;
     
-    @NotNull(message = "Funcion Requerida")
+    @NotNull(message = "Funcion requerido")
+    @Size(max = 25)
     @Column(name = "funcion", length = 25, nullable = false)
     private String funcion;
 
     public Empleado() {
     }
 
-    public Empleado(int id, String nombreCompleto, String funcion) {
+    public Empleado(Integer id, String nombreCompleto, String funcion) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.funcion = funcion;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -58,5 +70,6 @@ public class Empleado implements Serializable{
     public void setFuncion(String funcion) {
         this.funcion = funcion;
     }
-
+    
+    
 }
