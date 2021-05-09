@@ -9,9 +9,9 @@ package com.gmail.torandersonq.excepcion;
  *
  * @author Ander
  */
-public class ObjectNotFound extends RuntimeException{
+public class ObjectNotFoundException extends RuntimeException{
 
-    public ObjectNotFound(String message) {
+    public ObjectNotFoundException(String message) {
         super(message);
     }
     

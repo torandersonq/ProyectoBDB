@@ -1,7 +1,8 @@
 package com.gmail.torandersonq.controlador;
 
-import com.gmail.torandersonq.logica.EmpleadoServicio;
 import com.gmail.torandersonq.pojo.Empleado;
+import com.gmail.torandersonq.servicio.IEmpleadoServicio;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.validation.Valid;
 import javax.ws.rs.DELETE;
@@ -17,9 +18,13 @@ import javax.ws.rs.core.Response;
  *
  * @author Ander
  */
+
 @Stateless // No maneja comunicacion abierta
 @Path("/empleados") // Entrada URL para objeto: empleados
 public class EmpleadoControlador {
+    
+    @EJB
+    public IEmpleadoServicio servicio;
 
     @Path("/pruebaRetornarString") // Entrada URL servicio: pruebaRetornarString
     @GET // Retorna
@@ -49,7 +54,6 @@ public class EmpleadoControlador {
     @POST // Inserta
     @Produces(MediaType.APPLICATION_JSON) // Devuelve un JSON
     public Response insertar(@Valid Empleado empleado) {
-        EmpleadoServicio servicio = new EmpleadoServicio();
         servicio.insertarEmpleado(empleado);
         return Response.status(Response.Status.CREATED).build();
     }
@@ -58,7 +62,6 @@ public class EmpleadoControlador {
     @DELETE // Elimina
     @Produces(MediaType.APPLICATION_JSON) // Devuelve un JSON
     public Response eliminar(@PathParam("id") int empleado) {
-        EmpleadoServicio servicio = new EmpleadoServicio();
         servicio.eliminarEmpleado(empleado);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
