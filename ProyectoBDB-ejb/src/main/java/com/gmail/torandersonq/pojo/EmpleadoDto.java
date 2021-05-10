@@ -12,37 +12,28 @@ import java.io.Serializable;
  * @author Ander
  */
 public class EmpleadoDto implements Serializable{
-    
-    
-    private int id;
-    
-    private String nombreCompleto;
+     
+    private Integer id;
     
     private String funcion;
+    
+    private String nombreCompleto;
 
     public EmpleadoDto() {
     }
 
-    public EmpleadoDto(int id, String nombreCompleto, String funcion) {
+    public EmpleadoDto(Integer id, String funcion, String nombreCompleto) {
         this.id = id;
-        this.nombreCompleto = nombreCompleto;
         this.funcion = funcion;
+        this.nombreCompleto = nombreCompleto;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNombreCompleto() {
-        return nombreCompleto;
-    }
-
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
     }
 
     public String getFuncion() {
@@ -53,4 +44,13 @@ public class EmpleadoDto implements Serializable{
         this.funcion = funcion;
     }
 
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    
 }

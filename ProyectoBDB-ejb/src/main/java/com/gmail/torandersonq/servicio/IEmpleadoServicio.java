@@ -6,7 +6,10 @@
 package com.gmail.torandersonq.servicio;
 
 import com.gmail.torandersonq.entidad.Empleado;
+import com.gmail.torandersonq.excepcion.ObjectNotFoundException;
+import com.gmail.torandersonq.excepcion.ParamRequiredException;
 import com.gmail.torandersonq.pojo.EmpleadoDto;
+import com.gmail.torandersonq.pojo.EmpleadoPaginadoDto;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -20,11 +23,13 @@ public interface IEmpleadoServicio {
     
     public List<EmpleadoDto> listar();
     
-    public Empleado listarPorId(Integer id);
+    public EmpleadoPaginadoDto listarPaginado(int pagina, int tamano);
     
-    public void guardar(Empleado empleado);
+    public EmpleadoDto listarPorId(Integer id) throws ObjectNotFoundException;
     
-    public void editar(Empleado empleado);
+    public void guardar(Empleado empleado) throws ParamRequiredException;
     
-    public void eliminar(Integer id);
+    public void editar(Empleado empleado) throws ParamRequiredException, ObjectNotFoundException;
+    
+    public void eliminar(Integer id) throws ObjectNotFoundException;;
 }

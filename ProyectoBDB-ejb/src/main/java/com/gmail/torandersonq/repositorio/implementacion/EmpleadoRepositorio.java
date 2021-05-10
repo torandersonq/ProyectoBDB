@@ -6,11 +6,14 @@
 package com.gmail.torandersonq.repositorio.implementacion;
 
 import com.gmail.torandersonq.entidad.Empleado;
+import com.gmail.torandersonq.repositorio.AbstractFacade;
 import com.gmail.torandersonq.repositorio.IEmpleadoRepositorio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -18,34 +21,32 @@ import javax.persistence.PersistenceContext;
  */
 
 @Stateless
-public class EmpleadoRepositorio implements IEmpleadoRepositorio{
+public class EmpleadoRepositorio extends AbstractFacade<Empleado, Integer> implements IEmpleadoRepositorio{
     
     @PersistenceContext(unitName = "com.edu.unicundi_ProyectoBDB-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager entidad;
 
+    public EmpleadoRepositorio() {
+        super(Empleado.class);
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return entidad;
+    }
+
     @Override
     public List<Empleado> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Empleado> listaEmpleado = this.entidad.createNamedQuery("Empleado.listarTodo", Empleado.class);
+        return listaEmpleado.getResultList();
     }
 
     @Override
-    public Empleado listarPorId(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void guardar(Empleado empleado) {
-        this.entidad.persist(entidad);
-    }
-
-    @Override
-    public void editar(Empleado empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void eliminar(Empleado empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Integer cantidadTotal() {
+        this.entidad.getEntityManagerFactory().getCache().evictAll();
+        Query query = this.entidad.createNamedQuery("Empleado.cantidadTotal", Integer.class);    
+        Integer total = Integer.parseInt(query.getSingleResult().toString());
+        return total;
     }
     
 }

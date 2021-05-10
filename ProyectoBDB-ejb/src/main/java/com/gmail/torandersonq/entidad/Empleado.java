@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,29 +24,35 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "empleado")
+@NamedQueries({
+    @NamedQuery(name = "Empleado.listarTodo", query = "SELECT e FROM Empleado e"),
+    @NamedQuery(name = "Empleado.listarSoloEmpleado", query = "SELECT e.id, e.funcion, e.nombreCompleto FROM Empleado e"), 
+    @NamedQuery(name = "Empleado.cantidadTotal", query = "SELECT COUNT(e) FROM Empleado e")
+})
 public class Empleado implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
     
+    @NotNull(message = "Funcion requerido")
+    @Size(max = 25)
+    @Column(name = "funcion", length = 25, nullable = false)
+    private String funcion;
+    
     @NotNull(message = "Nombre requerido")
     @Size(max = 35)
     @Column(name = "nombreCompleto", length = 35, nullable = false)
     private String nombreCompleto;
     
-    @NotNull(message = "Funcion requerido")
-    @Size(max = 25)
-    @Column(name = "funcion", length = 25, nullable = false)
-    private String funcion;
 
     public Empleado() {
     }
 
-    public Empleado(Integer id, String nombreCompleto, String funcion) {
+    public Empleado(Integer id, String funcion, String nombreCompleto) {
         this.id = id;
-        this.nombreCompleto = nombreCompleto;
         this.funcion = funcion;
+        this.nombreCompleto = nombreCompleto;
     }
 
     public Integer getId() {
@@ -55,6 +63,14 @@ public class Empleado implements Serializable{
         this.id = id;
     }
 
+    public String getFuncion() {
+        return funcion;
+    }
+
+    public void setFuncion(String funcion) {
+        this.funcion = funcion;
+    }
+
     public String getNombreCompleto() {
         return nombreCompleto;
     }
@@ -63,13 +79,5 @@ public class Empleado implements Serializable{
         this.nombreCompleto = nombreCompleto;
     }
 
-    public String getFuncion() {
-        return funcion;
-    }
-
-    public void setFuncion(String funcion) {
-        this.funcion = funcion;
-    }
-    
     
 }

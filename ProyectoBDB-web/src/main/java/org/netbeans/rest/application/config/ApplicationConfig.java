@@ -38,6 +38,8 @@ public class ApplicationConfig extends Application {
         resources.add(com.gmail.torandersonq.excepcion.filtro.NotSupportedExceptionFilter.class);
         resources.add(com.gmail.torandersonq.excepcion.filtro.NullPointerExceptionFiltro.class);
         resources.add(com.gmail.torandersonq.excepcion.filtro.ObjectNotFoundExceptionFiltro.class);
+        resources.add(com.gmail.torandersonq.excepcion.filtro.ParamRequiredExceptionFilter.class);
+        resources.add(com.gmail.torandersonq.excepcion.filtro.ParamUsedExceptionFilter.class);
         resources.add(com.gmail.torandersonq.excepcion.filtro.WebApplicationExceptionFilter.class);
         resources.add(org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider.class);
         resources.add(org.codehaus.jackson.jaxrs.JacksonJsonProvider.class);

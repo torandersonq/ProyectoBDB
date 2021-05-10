@@ -19,6 +19,10 @@ public interface IEmpleadoRepositorio {
     
     public List<Empleado> listar();
     
+    public Integer cantidadTotal();
+    
+    public List<Empleado> listarPaginado(int pagina, int tamano);
+    
     public Empleado listarPorId(Integer id);
     
     public void guardar(Empleado empleado);
